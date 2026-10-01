@@ -19,6 +19,164 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+    }
+
+    /* ================= TOP RIGHT HAMBURGER NAVIGATION ================= */
+    .nav-menu-container {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 2000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .hamburger-btn {
+      width: 42px;
+      height: 42px;
+      background-color: #ffffff;
+      border: 1.5px solid #000000;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.18s ease-in-out;
+    }
+
+    .hamburger-btn:hover {
+      background-color: #f8fafc;
+      border-color: #1976d2;
+      box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: #000000;
+      border-radius: 1px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .hamburger-btn:hover span {
+      background-color: #1976d2;
+    }
+
+    /* Transform to 'X' when open */
+    .hamburger-btn.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Dropdown Card */
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 290px;
+      background: #ffffff;
+      border: 2px solid #000000;
+      border-radius: 8px;
+      padding: 14px 12px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-dropdown.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #000000;
+      text-transform: uppercase;
+      padding: 2px 6px 6px;
+      border-bottom: 1.5px solid #000000;
+      margin-bottom: 4px;
+    }
+
+    .nav-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #64748b;
+      text-transform: uppercase;
+      padding: 6px 6px 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 10px;
+      background-color: #ffffff;
+      color: #000000;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .nav-item:hover {
+      background-color: #f8fafc;
+      border-color: #1976d2;
+      color: #1976d2;
+      transform: translateX(2px);
+    }
+
+    .nav-item-home {
+      border-color: #cbd5e1;
+      background-color: #f8fafc;
+    }
+
+    .nav-item-aux:hover {
+      border-color: #d97706;
+      color: #b45309;
+    }
+
+    .nav-arrow {
+      color: #94a3b8;
+      font-size: 13px;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-item:hover .nav-arrow {
+      color: #1976d2;
+      transform: translateX(3px);
+    }
+
+    .nav-item-aux:hover .nav-arrow {
+      color: #d97706;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 4px 0;
     }
 
     /* 1-to-1 Document Container (960px width) */
@@ -553,9 +711,59 @@
       margin-top: 4px;
       text-transform: uppercase;
     }
+
+    @media print {
+      .nav-menu-container, .controls-panel {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ================= TOP RIGHT HAMBURGER NAVIGATION ================= -->
+  <nav class="nav-menu-container">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Portal Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-dropdown" id="navDropdown">
+      <div class="nav-dropdown-title">UCT TOOLKIT PORTAL</div>
+      
+      <!-- Homepage Link -->
+      <a href="https://uct-toolkit.pages.dev/" class="nav-item nav-item-home">
+        <span>Home (UCT Toolkit)</span>
+        <span class="nav-arrow">&rarr;</span>
+      </a>
+
+      <div class="nav-divider"></div>
+      <div class="nav-section-label">BOLDFACE &amp; OPS-LIMITS</div>
+      
+      <!-- (T-6A omitted since user is currently on T-6A) -->
+
+      <!-- T-1A -->
+      <a href="https://t-1a-boldface.pages.dev/" class="nav-item">
+        <span>T-1A BOLDFACE &amp; OPS-LIMITS</span>
+        <span class="nav-arrow">&rarr;</span>
+      </a>
+
+      <!-- T-38C -->
+      <a href="https://t-38-boldface.pages.dev/" class="nav-item">
+        <span>T-38C BOLDFACE &amp; OPS-LIMITS (IFF)</span>
+        <span class="nav-arrow">&rarr;</span>
+      </a>
+
+      <div class="nav-divider"></div>
+      <div class="nav-section-label">AUX TOOLS</div>
+      
+      <!-- MCSTS Playtime Calculator -->
+      <a href="https://mcsts-playtime-calculator.pages.dev/" class="nav-item nav-item-aux">
+        <span>MCSTS PLAYTIME CALCULATOR</span>
+        <span class="nav-arrow">&rarr;</span>
+      </a>
+    </div>
+  </nav>
 
   <!-- ================= PAGE 1: BOLDFACE (FULL) ================= -->
   <div class="document-page active-page" id="page-1">
@@ -1109,6 +1317,44 @@ OBOGS SUPPLY LEVER - OFF (BOTH)
     let currentPage = 1;
     let inRandomMode = false;
     let activeRandomModeSection = 1;
+
+    /* ================= TOP-RIGHT HAMBURGER TOGGLE ================= */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navDropdown = document.getElementById('navDropdown');
+
+    hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navDropdown.classList.contains('show');
+      if (isOpen) {
+        closeNavMenu();
+      } else {
+        openNavMenu();
+      }
+    });
+
+    function openNavMenu() {
+      navDropdown.classList.add('show');
+      hamburgerBtn.classList.add('open');
+    }
+
+    function closeNavMenu() {
+      navDropdown.classList.remove('show');
+      hamburgerBtn.classList.remove('open');
+    }
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!navDropdown.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        closeNavMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeNavMenu();
+      }
+    });
 
     /* Master Data for T-6A Section 1 BOLDFACE */
     const masterKeySec1 = [
@@ -2146,6 +2392,8 @@ OBOGS SUPPLY LEVER - OFF (BOTH)
           const block = document.getElementById(`random-block-${item.id}`);
           block.style.display = 'block';
           block.classList.remove('correct-box', 'incorrect-box');
+          const textarea = document.getElementById(`random-input-${item.id}`);
+          if (textarea) textarea.value = '';
           const badge = document.getElementById(`random-badge-${item.id}`);
           if (badge) badge.style.display = 'none';
           const solPanel = document.getElementById(`random-sol-${item.id}`);
@@ -2156,9 +2404,6 @@ OBOGS SUPPLY LEVER - OFF (BOTH)
             document.getElementById('rnd-input-6-line2').value = '';
             document.getElementById('rnd-input-6-line3-left').value = '';
             document.getElementById('rnd-input-6-line3-right').value = '';
-          } else {
-            const textarea = document.getElementById(`random-input-${item.id}`);
-            if (textarea) textarea.value = '';
           }
         });
       } else {
